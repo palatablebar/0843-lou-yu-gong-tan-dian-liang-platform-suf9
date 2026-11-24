@@ -1,0 +1,10 @@
+﻿building_id,meter_id,room_id,area_m2,start_reading,end_reading,main_kwh
+B1,M1,R1,100,1000,1100,500
+B1,M2,R2,100,500,600,500
+B1,M3,R3,200,800,1000,500
+B3,M6,R6,100,100,90,50
+B4,M7,R7,100,0,200,100
+B5,M8,R8,0,0,20,20
+B6,M9,R9,100,0,20,20
+
+B1,M1,R1,100,1000,1100,500,surplus

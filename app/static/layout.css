@@ -1,0 +1,31 @@
+.p0843 .shell{display:block;background-image:linear-gradient(90deg,transparent 49.8%,color-mix(in srgb,var(--ink) 6%,transparent) 50%,transparent 50.2%)}
+.p0843 .rail{display:flex;align-items:center;gap:18px;border-right:0;border-bottom:3px double var(--ink);padding:10px 20px}
+.p0843 .rail-label,.p0843 .rail-note{display:none}.p0843 #stage-nav{flex-direction:row;flex-wrap:wrap}
+.p0843 .toolbar{border-bottom:1px solid var(--line);background:transparent}
+.p0843 .board{grid-template-columns:1fr 1fr}
+.p0843 #panel-table{grid-column:1/-1}.p0843 #panel-review{grid-column:1/-1}
+.p0843 .panel{border:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);border-radius:0;box-shadow:none;background:color-mix(in srgb,var(--surface) 92%,transparent)}
+.p0843 .metric{border:0;border-left:3px solid var(--accent);border-radius:0}
+.p0843 th{font-family:var(--font-ui);font-variant:small-caps}
+
+@media (max-width: 980px) {
+  .p0843 .board { grid-template-columns: minmax(0,1fr) !important; grid-template-areas: none !important; }
+  .p0843 .board > * { grid-column: auto !important; grid-row: auto !important; grid-area: auto !important; }
+  .p0843 .kpis { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+}
+@media (max-width: 680px) {
+  .p0843 .shell { display: block !important; }
+  .p0843 .rail { height: auto !important; min-height: 0 !important; position: static !important; padding: 10px 12px !important; }
+  .p0843 .rail::after { display: none !important; }
+  .p0843 .rail-label, .p0843 .rail-note { display: none !important; }
+  .p0843 #stage-nav { flex-direction: row !important; flex-wrap: nowrap !important; overflow-x: auto !important; }
+  .p0843 #stage-nav button { width: auto !important; border-left: 0 !important; border-bottom: 2px solid transparent !important; white-space: nowrap; }
+  .p0843 #stage-nav button[aria-pressed="true"] { border-bottom-color: var(--accent) !important; }
+  .p0843 .toolbar { padding: 16px 14px !important; }
+  .p0843 .toolbar h1 { font-size: clamp(22px,8vw,38px); }
+  .p0843 main { padding: 8px !important; }
+  .p0843 .kpis { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+  .p0843 .metric:nth-child(2) { transform: none !important; }
+  .p0843 .panel, .p0843 .metric { min-width: 0 !important; }
+  .p0843 .table-wrap { max-width: 100%; overflow-x: auto; }
+}
