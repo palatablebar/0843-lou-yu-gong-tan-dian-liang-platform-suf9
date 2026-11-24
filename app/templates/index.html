@@ -27,6 +27,36 @@
       <div class="panel-head"><h2>运行对账</h2></div>
       <div class="ledger" id="ledger-list"></div>
     </article>
+    <article class="panel" id="panel-issuance">
+      <div class="panel-head">
+        <h2>合同上限与楼栋签发</h2>
+        <span class="hint" id="issuance-summary">执行批次后显示各楼栋签发结果</span>
+      </div>
+      <div class="contract-entry">
+        <label for="period">入账月份</label>
+        <input id="period" type="month" />
+        <label for="contract-limits">房间合同上限（kWh，每行 <code>房间=上限</code>，也可粘贴 JSON）</label>
+        <textarea id="contract-limits" placeholder="R3=30&#10;R4=5&#10;R5=10"></textarea>
+        <div class="review-actions">
+          <button id="apply-limits" type="button">带上限执行批次</button>
+          <button id="issue-all" type="button" disabled>签发全部对平楼栋</button>
+        </div>
+      </div>
+      <div class="table-wrap building-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>楼栋</th><th>结论</th><th class="num">总表公摊 Wh</th>
+              <th class="num">已分 Wh</th><th class="num">留待核差额 Wh</th>
+              <th>到顶房间</th><th>签发结果</th><th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="building-body">
+            <tr><td class="empty" colspan="8">尚未执行批次</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
     <article class="panel" id="panel-review">
       <div class="panel-head"><h2>批次复核</h2><span class="hint" id="revision">rev 0</span></div>
       <div class="review">

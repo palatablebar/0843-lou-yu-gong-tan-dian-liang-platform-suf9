@@ -129,3 +129,14 @@
   .p0843 .panel, .p0843 .metric { break-inside: avoid; border-color:#999; }
   .p0843 .print-only { display:block; }
 }
+
+/* 合同上限与楼栋签发 */
+.p0843 #panel-issuance { grid-column: 1 / -1; }
+.p0843 .contract-entry { display: grid; gap: 6px; margin-bottom: 10px; }
+.p0843 .contract-entry label { font-size: 12px; color: var(--muted); }
+.p0843 .contract-entry input[type="month"] { width: 180px; }
+.p0843 .contract-entry textarea { width: 100%; min-height: 54px; resize: vertical; font-family: var(--font-num); }
+.p0843 .building-wrap { max-height: 360px; }
+.p0843 td.shortfall, .p0843 .shortfall { color: var(--danger); font-weight: 700; }
+.p0843 #building-body button { padding: 3px 10px; font-size: 12px; cursor: pointer; }
+.p0843 #building-body button:disabled { cursor: default; opacity: .65; }

@@ -24,6 +24,7 @@ def load(profile: str, path: str | None = None):
     if len(raw) > MAX_FILE:
         raise DomainIssue("FILE_TOO_LARGE", 413)
     parsed = read_records(raw, SPEC["columns"], MAX_ROWS)
+    header = parsed["header"]
     issues = []
     counts = {"input": len(parsed["records"]), "accepted": 0, "isolated": 0, "duplicates": 0, "ignored": 0}
     valid = []
@@ -34,11 +35,11 @@ def load(profile: str, path: str | None = None):
         elif record["repeated"]:
             counts["ignored"] += 1
             issues.append({"line": record["line"], "key": "", "code": "REPEATED_HEADER"})
-        elif len(record["cells"]) != len(SPEC["columns"]):
+        elif len(record["cells"]) != len(header):
             counts["isolated"] += 1
             issues.append({"line": record["line"], "key": record["cells"][0] if record["cells"] else "", "code": "COLUMN_COUNT"})
         else:
-            row = dict(zip(SPEC["columns"], record["cells"]))
+            row = dict(zip(header, record["cells"]))
             row["_line"] = record["line"]
             if not row.get(SPEC["key"]):
                 counts["isolated"] += 1
@@ -49,8 +50,9 @@ def load(profile: str, path: str | None = None):
     for row in valid:
         grouped.setdefault(row[SPEC["key"]], []).append(row)
     accepted = []
+    signature_columns = header or SPEC["columns"]
     for key, rows in grouped.items():
-        signatures = {tuple(row[column] for column in SPEC["columns"]) for row in rows}
+        signatures = {tuple(row.get(column, "") for column in signature_columns) for row in rows}
         if len(signatures) == 1:
             accepted.append(rows[0])
             counts["accepted"] += 1

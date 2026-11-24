@@ -33,4 +33,4 @@ SPEC = {'code': '0843',
            'density': 'medium',
            'chart': 'gauge'},
  'chart': 'gauge',
- 'result_columns': {'main_kwh': '总表 kWh', 'usage_mwh': '分表合计 Wh', 'common_mwh': '应分摊 Wh'}}
+ 'result_columns': {'main_kwh': '总表 kWh', 'usage_mwh': '分表合计 Wh', 'common_mwh': '应分摊 Wh', 'allocated_common_mwh': '已分摊 Wh', 'shortfall': '留待核差额 Wh', 'issuable': '可签发'}}

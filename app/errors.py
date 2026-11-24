@@ -14,20 +14,27 @@ MESSAGES = {
     "SAMPLE_UNKNOWN": "样例不存在",
     "STAGE_UNKNOWN": "阶段不存在",
     "RUN_NOT_FOUND": "批次不存在",
+    "BUILDING_NOT_FOUND": "楼栋不存在",
     "STALE_REVIEW": "批次已被更新，请刷新后复核",
     "GATE_BLOCKED": "存在阻断项，不能签发",
+    "BUILDING_BLOCKED": "该楼栋不能签发",
+    "ISSUE_BLOCKED": "该楼栋不能签发",
     "NOT_APPROVED": "批次尚未签发",
     "BAD_REQUEST": "请求内容不完整",
 }
 
 
 class DomainIssue(Exception):
-    def __init__(self, code: str, status: int = 400, detail: str | None = None):
+    def __init__(self, code: str, status: int = 400, detail: str | None = None, extra: dict | None = None):
         self.code = code
         self.status = status
         self.detail = detail
+        self.extra = extra or {}
         super().__init__(code)
 
 
 def error_response(exc: DomainIssue):
-    return jsonify(error=exc.detail or MESSAGES.get(exc.code, "请求无法处理"), code=exc.code), exc.status
+    body = {"error": exc.detail or MESSAGES.get(exc.code, "请求无法处理"), "code": exc.code}
+    if exc.extra:
+        body.update(exc.extra)
+    return jsonify(body), exc.status
